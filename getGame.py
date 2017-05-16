@@ -1,5 +1,6 @@
 from lxml import html
 import requests
+import numpy as np
 
 #Gets url for a given game
 #Takes season formatted as yearStart yearEnd concatenated
@@ -15,6 +16,17 @@ def getURL(season, gameNumber):
     url += gameNumber
     url += ".HTM"
     return url
+
+def getGame(season, gameNumber):
+    url = getURL(season, gameNumber)
+    page = requests.get(url)
+    if page.status_code == 404:
+        return None
+    html_content = html.fromstring(page)
+    return html_content
+
+#returns an array of games for the season
+#def getSeason(season):
 
 print(getURL('20162017', '0156'))
 print(getURL('20172015', '01442'))
