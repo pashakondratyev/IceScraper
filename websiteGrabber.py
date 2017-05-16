@@ -1,6 +1,9 @@
 from lxml import html
 import requests
 
+#formatting for page is 
+#'http://www.nhl.com/scores/htmlreports/yearsOfSeason/PL02####.htm')
+#where #### is the game number
 page = requests.get('http://www.nhl.com/scores/htmlreports/20162017/PL020714.HTM')
 tree = html.fromstring(page.content)
 
@@ -8,4 +11,4 @@ tree = html.fromstring(page.content)
 #Work on formatting
 goals = tree.xpath('//td[@class="goal + bborder"]/text()')
 
-print 'Goals: ', goals
+print('Goals: ', goals)
