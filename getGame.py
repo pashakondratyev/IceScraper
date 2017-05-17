@@ -17,6 +17,13 @@ def getURL(season, gameNumber):
     url += ".HTM"
     return url
 
+def getHTMLContent(url):
+    page = requests.get(url)
+    if page.status_code == 404:
+        return None
+    html_content = html.fromstring(page)
+    return html_content
+
 def getGame(season, gameNumber):
     url = getURL(season, gameNumber)
     page = requests.get(url)
@@ -25,9 +32,24 @@ def getGame(season, gameNumber):
     html_content = html.fromstring(page)
     return html_content
 
-#returns an array of games for the season
-#def getSeason(season):
+#returns an array of urls for games for the season
+def getSeason(season):
+    #TODO
+    #Perform check for season
+    gameURLs = []
+    gameIterator = 1
+    url = getURL(season, '%04d' % gameIterator)
+    page = requests.get(url)
+    while(page.status_code != 404):
+        gameURLs.append(url)
+        gameIterator += 1
+        url = getURL(season, '%04d' % gameIterator)
+        page = requests.get(url)
+    return gameURLs
+    
 
+
+print(getSeason('20162017'))
 print(getURL('20162017', '0156'))
 print(getURL('20172015', '01442'))
 print(getURL('20162017', '011115'))
