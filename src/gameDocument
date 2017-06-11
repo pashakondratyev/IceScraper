@@ -1,0 +1,19 @@
+{"game": number,
+"season": seasonYear,
+"teams": {
+ 	"away":{
+		"name":
+		"abbreviation":
+	}
+	"home":{
+		"name":
+		"abbreviation":
+	
+	}
+}
+"goals": {
+	"awayGoals": []
+	"awayGoalsNumber"
+	"homeGoals": []
+	"homeGoalsNumber"
+}
